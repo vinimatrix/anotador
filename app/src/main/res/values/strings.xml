@@ -4,4 +4,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="txt_admin">Admin</string>
+    <string name="pais_spinner_prompt_text">Seleccione el pais del equipo</string>
 </resources>

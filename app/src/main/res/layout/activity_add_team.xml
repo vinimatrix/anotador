@@ -6,20 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".AddTeamActivity">
 
-    <LinearLayout
+
+    <RelativeLayout
+        android:id="@+id/form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cual es el pais del equipo?"/>
+            android:text="Cual es el pais del equipo?"
+            android:textSize="18sp" />
 
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="Seleccione el pais"/>
+            android:layout_height="40dp"
+            android:fadingEdge="horizontal"
+            android:prompt="@string/pais_spinner_prompt_text"
+            android:requiresFadingEdge="horizontal" />
 
-    </LinearLayout>
+        <EditText
+            android:id="@+id/team_ciudad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ciudad"
+            android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/team_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre del Equipo"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/team_short_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre corto (3-6 letras)"
+        android:inputType="textPersonName" />
+
+        <AutoCompleteTextView
+            android:id="@+id/liga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Seleccione la Liga" />
+</LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/blue"
+            android:text="Aceptar" />
+    </RelativeLayout>
+
+
 </android.support.constraint.ConstraintLayout>

@@ -24,4 +24,11 @@ public class Pais {
     public void setCode(String code) {
         Code = code;
     }
+
+    @Override
+    public java.lang.String toString() {
+        return this.pais;
+    }
+
+
 }

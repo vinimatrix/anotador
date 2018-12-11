@@ -1,10 +1,12 @@
 package com.example.viniciomendez.anotador;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,9 +18,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -43,7 +52,8 @@ public class AddTeamActivity extends AppCompatActivity {
     private Equipo equipo;
     private String _pais;
     private List<Pais> users;
-    private DatabaseReference mDatabase;
+   // private DatabaseReference mDatabase;
+    private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +72,7 @@ public class AddTeamActivity extends AppCompatActivity {
         NombreEquipo = (EditText) findViewById(R.id.team_nombre);
         NombreCorto = (EditText) findViewById(R.id.team_short_name);
         userSpinner.setPrompt("Seleccione el Pais");
-
+        db = FirebaseFirestore.getInstance();
         userSpinner.setAdapter(userAdapter);
         userSpinner.setSelection(0);
 
@@ -117,25 +127,42 @@ public class AddTeamActivity extends AppCompatActivity {
       btnAccept.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            equipo = new Equipo(NombreEquipo.getText().toString());
-                    equipo.setPais(_pais);
-                    equipo.setLiga(liga.getText().toString());
-                    equipo.setNombreCorto(NombreCorto.getText().toString());
-                    equipo.setCiudad(ciudad.getText().toString());
-                    equipo.setTempotada((String.valueOf(Calendar.getInstance().get(calendar.YEAR))));
-              // Write a message to the database
+              equipo = new Equipo(NombreEquipo.getText().toString());
+              equipo.setPais(_pais);
+              equipo.setLiga(liga.getText().toString());
+              equipo.setNombreCorto(NombreCorto.getText().toString());
+              equipo.setCiudad(ciudad.getText().toString());
+              equipo.setTempotada((String.valueOf(Calendar.getInstance().get(calendar.YEAR))));
+             /* // Write a message to the database
 
 // ...        FirebaseApp.initializeApp(getBaseContext());
               // Write a message to the database
               FirebaseDatabase database = FirebaseDatabase.getInstance();
               DatabaseReference myref = database.getReference("anotador-5ff36");
+*/
+              db.collection("Equipo")
+                      .add(equipo)
+                      .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                          @Override
+                          public void onSuccess(DocumentReference documentReference) {
+                              Log.d("Success", "DocumentSnapshot added with ID: " + documentReference.getId());
 
-              Map<String, Equipo> users = new HashMap<>();
+                          }
+                      })
+                      .addOnFailureListener(new OnFailureListener() {
+                             public void onFailure(@NonNull Exception e) {
+
+                                  Log.w("Error", "Error adding document", e);
+
+                          }
+                      });
+
+            /*  Map<String, Equipo> users = new HashMap<>();
               users.put("equipos", equipo);
-              myref.setValue(users);
-
+             // myref.setValue(users);*/
 
           }
+
       });
     }
     public void getSelectedUser(View v) {

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1086080705719",
+    "firebase_url": "https://anotador-5ff36.firebaseio.com",
+    "project_id": "anotador-5ff36",
+    "storage_bucket": "anotador-5ff36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086080705719:android:fb61779096dfa6b3",
+        "android_client_info": {
+          "package_name": "com.example.viniciomendez.anotador"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086080705719-al5uth8djh0uffm2pechcctfq9j71841.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.viniciomendez.anotador",
+            "certificate_hash": "0cebcdfaf9761981c5561ed63624437d3feaf53a"
+          }
+        },
+        {
+          "client_id": "1086080705719-6p60irdrtkq4k78i9svgkckot254pupb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTOqA2zIK5ID8Vi9kAI8Jl3J-XmSE2C80"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086080705719-6p60irdrtkq4k78i9svgkckot254pupb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

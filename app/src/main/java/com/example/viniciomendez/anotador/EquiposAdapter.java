@@ -2,13 +2,16 @@ package com.example.viniciomendez.anotador;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.List;
 
 public class EquiposAdapter extends ArrayAdapter<Equipo>{
@@ -29,6 +32,7 @@ private  Context mContext;
         }
         Equipo p = getItem(position);
         if(p!= null){
+
             TextView tt1 = (TextView)v.findViewById(R.id.team_name);
             TextView tt2 = (TextView)v.findViewById(R.id.team_league);
             TextView tt3 = (TextView)v.findViewById(R.id.txt_admin);

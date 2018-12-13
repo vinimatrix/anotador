@@ -18,13 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:textColor="#757272"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/team_league"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#757272" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,6 +43,7 @@
             android:layout_weight="1"
             android:text="@string/txt_admin"
             android:textAlignment="viewEnd"
+            android:textColor="#757272"
             android:textSize="18sp" />
     </LinearLayout>
 

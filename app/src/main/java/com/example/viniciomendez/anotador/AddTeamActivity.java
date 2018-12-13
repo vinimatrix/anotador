@@ -2,10 +2,12 @@ package com.example.viniciomendez.anotador;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -133,6 +135,7 @@ public class AddTeamActivity extends AppCompatActivity {
               equipo.setNombreCorto(NombreCorto.getText().toString());
               equipo.setCiudad(ciudad.getText().toString());
               equipo.setTempotada((String.valueOf(Calendar.getInstance().get(calendar.YEAR))));
+              Log.d("Valor",equipo.getNombre());
              /* // Write a message to the database
 
 // ...        FirebaseApp.initializeApp(getBaseContext());
@@ -140,26 +143,33 @@ public class AddTeamActivity extends AppCompatActivity {
               FirebaseDatabase database = FirebaseDatabase.getInstance();
               DatabaseReference myref = database.getReference("anotador-5ff36");
 */
-              db.collection("Equipo")
-                      .add(equipo)
-                      .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                          @Override
-                          public void onSuccess(DocumentReference documentReference) {
-                              Log.d("Success", "DocumentSnapshot added with ID: " + documentReference.getId());
+             if(equipo.getPais()!="Seleccione el pais" && !TextUtils.isEmpty(equipo.getNombre()) && !TextUtils.isEmpty(equipo.getCiudad()) && !TextUtils.isEmpty(equipo.getLiga())) {
+                 db.collection("Equipo")
+                         .add(equipo)
+                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                             @Override
+                             public void onSuccess(DocumentReference documentReference) {
+                                 Log.d("Success", "DocumentSnapshot added with ID: " + documentReference.getId());
 
-                          }
-                      })
-                      .addOnFailureListener(new OnFailureListener() {
+                             }
+                         })
+                         .addOnFailureListener(new OnFailureListener() {
                              public void onFailure(@NonNull Exception e) {
 
-                                  Log.w("Error", "Error adding document", e);
+                                 Log.w("Error", "Error adding document", e);
 
-                          }
-                      });
+                             }
+                         });
 
+                 Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+                 startActivity(intent);
             /*  Map<String, Equipo> users = new HashMap<>();
               users.put("equipos", equipo);
              // myref.setValue(users);*/
+             }
+             else {
+                 Toast.makeText(view.getContext(),"Faltan campos por llenar, verifica",Toast.LENGTH_LONG).show();
+             }
 
           }
 

@@ -1,79 +1,95 @@
 package com.example.viniciomendez.anotador;
 
+import java.security.PublicKey;
+
 public class Equipo {
-    private String Nombre;
-    private String NombreCorto;
-    private String Liga;
-    private String Pais;
-    private String Ciudad;
-    private String Division;
-    private String Tempotada;
-    private String TeamId;
+    private String nombre;
+    private String nombreCorto;
+    private String liga;
+    private String pais;
+    private String ciudad;
+    private String division;
+    private String tempotada;
+    private String teamId;
     private int Id;
-    public Equipo(String nombre){
-        this.setNombre(nombre);
+
+    public Equipo(){}
+    public Equipo(String nombre) {
+        this.nombre = nombre;
     }
-    public String getNombre(){
-        return this.Nombre;
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getNombreCorto() {
-        return NombreCorto;
+        return nombreCorto;
     }
 
     public void setNombreCorto(String nombreCorto) {
-        NombreCorto = nombreCorto;
+        this.nombreCorto = nombreCorto;
     }
 
     public String getLiga() {
-        return Liga;
+        return liga;
     }
 
     public void setLiga(String liga) {
-        Liga = liga;
+        this.liga = liga;
     }
 
     public String getPais() {
-        return Pais;
+        return pais;
     }
 
     public void setPais(String pais) {
-        Pais = pais;
+        this.pais = pais;
     }
 
     public String getCiudad() {
-        return Ciudad;
+        return ciudad;
     }
 
     public void setCiudad(String ciudad) {
-        Ciudad = ciudad;
+        this.ciudad = ciudad;
     }
 
     public String getDivision() {
-        return Division;
+        return division;
     }
 
     public void setDivision(String division) {
-        Division = division;
+        this.division = division;
     }
 
     public String getTempotada() {
-        return Tempotada;
+        return tempotada;
     }
 
     public void setTempotada(String tempotada) {
-        Tempotada = tempotada;
+        this.tempotada = tempotada;
     }
 
     public String getTeamId() {
-        return TeamId;
+        return teamId;
     }
 
     public void setTeamId(String teamId) {
-        TeamId = teamId;
+        this.teamId = teamId;
     }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+
+
+
 }

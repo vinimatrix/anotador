@@ -1,16 +1,15 @@
-package com.example.viniciomendez.anotador;
+package com.example.viniciomendez.anotador.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.example.viniciomendez.anotador.Entities.Equipo;
+import com.example.viniciomendez.anotador.R;
 
 import java.util.List;
 

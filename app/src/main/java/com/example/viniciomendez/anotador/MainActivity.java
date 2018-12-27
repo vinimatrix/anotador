@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.viniciomendez.anotador.Adapters.TeamsAdapter;
+import com.example.viniciomendez.anotador.Entities.Equipo;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {

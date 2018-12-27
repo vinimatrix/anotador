@@ -1,4 +1,4 @@
-package com.example.viniciomendez.anotador;
+package com.example.viniciomendez.anotador.Entities;
 
 public class Pais {
     private String pais;

@@ -1,6 +1,7 @@
 package com.example.viniciomendez.anotador;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -11,17 +12,17 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.viniciomendez.anotador.Adapters.EquiposAdapter;
+import com.example.viniciomendez.anotador.Entities.Equipo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,15 +70,28 @@ public class Main2Activity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    List<Equipo> equipos = new ArrayList<>();
+                    final List<Equipo> equipos = new ArrayList<>();
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document:task.getResult()){
                             Equipo e = document.toObject(Equipo.class);
+                            e.setTeamId(document.getId());
                             equipos.add(e);
                         }
                         ListView list = (ListView)findViewById(R.id.lv_teams);
                         EquiposAdapter adapter = new EquiposAdapter(getApplicationContext(),R.layout.item_team,equipos);
                         list.setAdapter(adapter);
+                        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                               Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
+                             // long iD = cursor.getLong(cursor.getColumnIndexOrThrow("_id"));
+                                Intent intent = new Intent(getBaseContext(),EquipoActivity.class);
+                                intent.putExtra("TEAM_ID",equipos.get(i).getTeamId());
+                                startActivity(intent);
+                                Toast.makeText(getBaseContext(), equipos.get(i).getTeamId() + "", Toast.LENGTH_LONG).show();
+                            }
+                        });
 
                         }
                         else{
@@ -99,6 +113,7 @@ public class Main2Activity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     for (QueryDocumentSnapshot document:task.getResult()){
                                         Equipo e = document.toObject(Equipo.class);
+                                        e.setTeamId(document.getId());
                                         equipos.add(e);
                                     }
                                     ListView list = (ListView)findViewById(R.id.lv_teams);

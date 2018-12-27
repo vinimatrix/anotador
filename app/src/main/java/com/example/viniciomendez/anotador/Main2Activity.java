@@ -64,7 +64,6 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
         db = FirebaseFirestore.getInstance();
-
         db.collection("Equipo")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -88,6 +87,7 @@ public class Main2Activity extends AppCompatActivity {
                              // long iD = cursor.getLong(cursor.getColumnIndexOrThrow("_id"));
                                 Intent intent = new Intent(getBaseContext(),EquipoActivity.class);
                                 intent.putExtra("TEAM_ID",equipos.get(i).getTeamId());
+                                intent.putExtra("TEAM_NAME",equipos.get(i).getNombre());
                                 startActivity(intent);
                                 Toast.makeText(getBaseContext(), equipos.get(i).getTeamId() + "", Toast.LENGTH_LONG).show();
                             }

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +35,10 @@ public class CalendarioFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public CalendarioFragment() {
+
     }
 
-    public CalendarioFragment(String teamId) {
-        this.idTeam = teamId;
-    }
+
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
@@ -46,6 +46,7 @@ public class CalendarioFragment extends Fragment {
         CalendarioFragment fragment = new CalendarioFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
+        fragment.idTeam = "licey";
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,6 +57,7 @@ public class CalendarioFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+           // this.idTeam = getArguments().getString("TEAM_ID");
         }
     }
 
@@ -63,6 +65,7 @@ public class CalendarioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendario_list, container, false);
+
 
         // Set the adapter
         if (view instanceof RecyclerView) {

@@ -6,9 +6,12 @@
     <string name="txt_admin">Admin</string>
     <string name="pais_spinner_prompt_text">Seleccione el pais del equipo</string>
     <string name="title_activity_equipo">EquipoActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="tab_text_1">Calendario</string>
+    <string name="tab_text_2">Estadisticas</string>
+    <string name="tab_text_3">Lineup</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

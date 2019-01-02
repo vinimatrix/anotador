@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 import com.example.viniciomendez.anotador.CalendarioFragment;
+import com.example.viniciomendez.anotador.LineupFragment;
+import com.example.viniciomendez.anotador.StatsFragment;
 
 public class EquiposPageAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
@@ -19,7 +21,7 @@ public class EquiposPageAdapter extends FragmentStatePagerAdapter {
 
     public EquiposPageAdapter(FragmentManager fm) {
         super(fm);
-        this.mNumOfTabs = 1;
+        this.mNumOfTabs = 3;
     }
 
     @Override
@@ -33,6 +35,20 @@ public class EquiposPageAdapter extends FragmentStatePagerAdapter {
                 args.putCharSequence("teamId", this.teamId);
                cf.setArguments(args);
                 return cf;
+            case 1:
+                Log.d("POSICION",String.valueOf(position));
+                StatsFragment sf = new StatsFragment();
+                args = new Bundle();
+                args.putCharSequence("teamId", this.teamId);
+                sf.setArguments(args);
+               return sf;
+            case 2:
+                Log.d("POSICION",String.valueOf(position));
+                LineupFragment lf = new LineupFragment();
+                args = new Bundle();
+                args.putCharSequence("teamId", this.teamId);
+                lf.setArguments(args);
+                return lf;
 
 
             default:

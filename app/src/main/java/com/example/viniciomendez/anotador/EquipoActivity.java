@@ -62,15 +62,16 @@ public class EquipoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipo2);
         Intent intent = getIntent();
-        String teamID=  intent.getCharSequenceExtra("TEAM_ID").toString();
-        this.setTitle(intent.getCharSequenceExtra("TEAM_NAME"));
+        final String teamID=  intent.getExtras().getString("TEAM_ID");
+        Equipo team;
+        this.setTitle(intent.getExtras().getString("TEAM_NAME"));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
        // mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mSectionsPagerAdapter = new EquiposPageAdapter(getSupportFragmentManager(),3,teamID);
+        mSectionsPagerAdapter = new EquiposPageAdapter(getSupportFragmentManager(),2,teamID);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -89,6 +90,7 @@ public class EquipoActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+        Log.d("TEST",teamID);
         db = FirebaseFirestore.getInstance();
         db.collection("Equipo").document(teamID)
                 .get()
@@ -101,24 +103,9 @@ public class EquipoActivity extends AppCompatActivity {
                             Equipo e = document.toObject(Equipo.class);
                             e.setTeamId(document.getId());
                             EquipoActivity.this.setTitle(e.getNombre());
+
                             Toast.makeText(getBaseContext(), e.getNombre() + "", Toast.LENGTH_LONG).show();
-                            // equipos.add(e);
 
-                            //ListView list = (ListView)findViewById(R.id.lv_teams);
-                            //EquiposAdapter adapter = new EquiposAdapter(getApplicationContext(),R.layout.item_team,equipos);
-                            //list.setAdapter(adapter);
-                           /* list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                                    Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
-                                    // long iD = cursor.getLong(cursor.getColumnIndexOrThrow("_id"));
-                                    //Intent intent = new Intent(getBaseContext(),EquipoActivity.class);
-                                    //intent.putExtra("TEAM_ID",equipos.get(i).getTeamId());
-                                   // startActivity(intent);
-                                   // Toast.makeText(getBaseContext(), equipos.get(i).getTeamId() + "", Toast.LENGTH_LONG).show();
-                                }
-                            });*/
 
                         }
                         else{

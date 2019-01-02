@@ -89,7 +89,7 @@ public class Main2Activity extends AppCompatActivity {
                                 intent.putExtra("TEAM_ID",equipos.get(i).getTeamId());
                                 intent.putExtra("TEAM_NAME",equipos.get(i).getNombre());
                                 startActivity(intent);
-                                Toast.makeText(getBaseContext(), equipos.get(i).getTeamId() + "", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getBaseContext(), equipos.get(i).getTeamId() + "", Toast.LENGTH_LONG).show();
                             }
                         });
 

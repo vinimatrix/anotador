@@ -1,5 +1,6 @@
 package com.example.viniciomendez.anotador;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.viniciomendez.anotador.CalendarioFragment.OnListFragmentInteractionListener;
+import com.example.viniciomendez.anotador.Entities.Calendario;
 import com.example.viniciomendez.anotador.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -16,62 +18,45 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyCalendarioRecyclerViewAdapter extends RecyclerView.Adapter<MyCalendarioRecyclerViewAdapter.ViewHolder> {
+public class MyCalendarioRecyclerViewAdapter extends RecyclerView.Adapter<MyCalendarioRecyclerViewAdapter.MyViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private List<Calendario> calendarioList;
 
-    public MyCalendarioRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{ public TextView txtDia,txtFechaMes,txtEquipos,hora,estadio;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            txtDia = (TextView)itemView.findViewById(R.id.txt_dia);
+            txtFechaMes = (TextView) itemView.findViewById(R.id.fecha_mes);
+            txtEquipos = (TextView) itemView.findViewById(R.id.txt_equipos);
+            hora = (TextView)itemView.findViewById(R.id.txt_hora);
+            estadio= (TextView)itemView.findViewById(R.id.txt_estadio);
+        }
+    }
+    public MyCalendarioRecyclerViewAdapter(List<Calendario> calendarioList){
+        this.calendarioList = calendarioList;
+    }
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.fragment_calendario,parent,false);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_calendario, parent, false);
-        return new ViewHolder(view);
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Calendario calendario =calendarioList.get(position);
+        holder.hora.setText(calendario.getHora());
+        holder.txtEquipos.setText(calendario.getAwayTeam()+" @ "+calendario.getHomeTeam());
+        holder.txtDia.setText(calendario.getFecha());
+        holder.estadio.setText(calendario.getEstadio());
     }
 
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
-    }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
-
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
+        return calendarioList.size();
     }
 }
+

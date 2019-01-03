@@ -2,7 +2,9 @@ package com.example.viniciomendez.anotador;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,11 +14,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.viniciomendez.anotador.Adapters.EquiposAdapter;
 import com.example.viniciomendez.anotador.Entities.Calendario;
+import com.example.viniciomendez.anotador.Entities.Equipo;
 import com.example.viniciomendez.anotador.dummy.DummyContent;
 import com.example.viniciomendez.anotador.dummy.DummyContent.DummyItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +48,7 @@ public class CalendarioFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private String idTeam;
     FloatingActionButton fab;
+    private FirebaseFirestore db;
     List<Calendario> calendarios = new ArrayList<>();
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -66,12 +78,34 @@ public class CalendarioFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
             this.idTeam = getArguments().getString("teamId");
+            Log.d("BUMDLE",getArguments().getString("teamId"));
         }
+        Log.d("TEAMID",idTeam);
+        db = FirebaseFirestore.getInstance();
+        db.collection("Calendarios")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        final List<Calendario> calendarios = new ArrayList<>();
+                        if(task.isSuccessful()){
+                            for (QueryDocumentSnapshot document:task.getResult()){
+                                Calendario c = document.toObject(Calendario.class);
+                                c.setTeamId(getArguments().getString("teamId"));
+                                calendarios.add(c);
+                            }
 
-        Calendario c = new Calendario("MqL8ETiqkboMeBHdpaUp");
+
+                        }
+                        else{
+                            Log.d("Main2Activity", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        /*Calendario c = new Calendario("MqL8ETiqkboMeBHdpaUp");
         Calendario c1 = new Calendario("SnzM3auFCZZAJCQrXVMn\n");
         this.calendarios.add(c);
-        this.calendarios.add(c1);
+        this.calendarios.add(c1);*/
 
     }
 
@@ -100,6 +134,8 @@ public class CalendarioFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),AddCalendario.class);
                 intent.putExtra("ID_TEAM",idTeam);
+                Log.d("TeamID",idTeam);
+
                 startActivity(intent);
             }
         });

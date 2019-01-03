@@ -8,6 +8,9 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+
     <LinearLayout
         android:id="@+id/linear1"
         android:layout_width="match_parent"
@@ -16,15 +19,15 @@
 
              <EditText
                 android:id="@+id/editText1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:ems="10"
-                android:hint="Enter Date" />
+                android:hint="Fecha" />
 
         <TextView
                 android:id="@+id/textView1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/button1"
                 android:textStyle="bold"
@@ -39,21 +42,50 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Hora" />
+        <EditText
+            android:id="@+id/txt_estadio"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Estadio" />
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editText1"
+            android:text="Oponente" />
 
-            android:layout_gravity="center_horizontal"
-            android:background="@color/ColorPrimary"
-            android:text="Get Date" />
+        <Spinner
+            android:id="@+id/oponente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textLocacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Local/Visitante" />
+
+        <Spinner
+            android:id="@+id/local_visitante"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@color/ColorPrimary"
+        android:text="Crear" />
 </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

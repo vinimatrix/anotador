@@ -3,6 +3,11 @@ package com.example.viniciomendez.anotador.Entities;
 import java.security.PublicKey;
 
 public class Equipo {
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+
     private String nombre;
     private String nombreCorto;
     private String liga;

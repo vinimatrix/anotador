@@ -7,11 +7,28 @@ public class Calendario {
     private String estadio; //estadio donde se va a jugar
     private String fecha;  //fecha del juego
     private boolean passed; // si el juego ya paso
-    private Equipo homeTeam; //equipo local
-    private Equipo awayTeam; //equipo visitante
+    private Equipo oponent;
     private String winLoose; //si el equipo gano o perdio
     private String hora;   // hora del juego
     private String Notas;  //Nota del juego
+    private String awayHome;
+
+    public String getCalendarioId() {
+        return calendarioId;
+    }
+
+    public void setCalendarioId(String calendarioId) {
+        this.calendarioId = calendarioId;
+    }
+
+    private String calendarioId;
+    public String getAwayHome() {
+        return awayHome;
+    }
+
+    public void setAwayHome(String awayHome) {
+        this.awayHome = awayHome;
+    }
 
     public String getTeamId() {
         return teamId;
@@ -45,22 +62,6 @@ public class Calendario {
         this.passed = passed;
     }
 
-    public Equipo getHomeTeam() {
-        return homeTeam;
-    }
-
-    public void setHomeTeam(Equipo homeTeam) {
-        this.homeTeam = homeTeam;
-    }
-
-    public Equipo getAwayTeam() {
-        return awayTeam;
-    }
-
-    public void setAwayTeam(Equipo awayTeam) {
-        this.awayTeam = awayTeam;
-    }
-
     public String getWinLoose() {
         return winLoose;
     }
@@ -89,8 +90,17 @@ public class Calendario {
         return TipoJuego;
     }
 
+    public Equipo getOponent() {
+        return oponent;
+    }
+
+    public void setOponent(Equipo oponent) {
+        this.oponent = oponent;
+    }
+
     public void setTipoJuego(String tipoJuego) {
         TipoJuego = tipoJuego;
+
     }
 
     private String TipoJuego; // posttemporada,exibicion,temporada,final

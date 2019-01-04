@@ -2,6 +2,7 @@ package com.example.viniciomendez.anotador;
 
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
@@ -17,12 +18,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.viniciomendez.anotador.Adapters.EquiposAdapter;
+import com.example.viniciomendez.anotador.Entities.Calendario;
 import com.example.viniciomendez.anotador.Entities.Equipo;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -38,7 +44,8 @@ import io.opencensus.stats.View;
 public class AddCalendario extends AppCompatActivity {
 
     DatePickerDialog picker;
-    EditText eText;
+    TimePickerDialog timepicker;
+    EditText eText,hora,estadio;
     Button btnGet;
     TextView tvw;
     Intent myintent;
@@ -55,6 +62,9 @@ public class AddCalendario extends AppCompatActivity {
         tvw=(TextView)findViewById(R.id.textView1);
         eText=(EditText) findViewById(R.id.editText1);
         eText.setInputType(InputType.TYPE_NULL);
+        estadio = (EditText)findViewById(R.id.txt_estadio);
+        hora = (EditText) findViewById(R.id.txt_hora);
+        hora.setInputType(InputType.TYPE_NULL);
 
         if(savedInstanceState==null) {
             Bundle extras = getIntent().getExtras();
@@ -86,19 +96,62 @@ public class AddCalendario extends AppCompatActivity {
             }
         });
 
+        hora.setOnClickListener(new android.view.View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View view) {
+                myintent = getIntent();
+                final Calendar cldr = Calendar.getInstance();
+                final int hour = cldr.get(Calendar.HOUR);
+                final int minutes = cldr.get(Calendar.MINUTE);
+                final String[] AMPM = {""};
+                timepicker = new TimePickerDialog(AddCalendario.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                                 AMPM[0] = (i < 12) ? "AM" : "PM";
+                                hora.setText(i+":"+i1 +" " + AMPM[0]);
+                            }
+                        },hour,minutes,false
+                );
+                timepicker.show();
+            }
+        });
         btnGet=(Button)findViewById(R.id.button1);
         btnGet.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View view) {
 
                 tvw.setText("Selected Date: "+ eText.getText());
-                Equipo visitor = (Equipo)((Spinner) findViewById(R.id.oponente)).getSelectedItem();
+                Equipo oponente = (Equipo)((Spinner) findViewById(R.id.oponente)).getSelectedItem();
                 String location = ((String)localVisitante.getSelectedItem());
                 Log.d("Location",location);
-                Log.d("VERSUS",SetMatch(location,visitor.getNombre()));
+                Log.d("VERSUS",SetMatch(location,oponente.getNombre()));
                 Log.d("TEST",idTEam);
 
+               Calendario c = new Calendario();
+               c.setTeamId(idTEam);
+               c.setOponent(oponente);
+               c.setHora(hora.getText().toString());
+               c.setFecha(eText.getText().toString());
+               c.setEstadio(estadio.getText().toString());
+               c.setAwayHome(location);
+                db.collection("Calendario")
+                        .add(c)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d("Success", "DocumentSnapshot added with ID: " + documentReference.getId());
 
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            public void onFailure(@NonNull Exception e) {
+
+                                Log.w("Error", "Error adding document", e);
+
+                            }
+                        });
                 //Equipo local = (Equipo)((Spinner) findViewById(R.id.spinner3)).getSelectedItem();
 
             }
@@ -164,7 +217,7 @@ public class AddCalendario extends AppCompatActivity {
     }
 
     private boolean IsHome(String location){
-        if(location=="local"){
+        if(location=="Local"){
             return true;
         }
         return false;

@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.viniciomendez.anotador.Adapters.EquiposAdapter;
 import com.example.viniciomendez.anotador.Adapters.EquiposPageAdapter;
+import com.example.viniciomendez.anotador.Entities.Calendario;
 import com.example.viniciomendez.anotador.Entities.Equipo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,7 +40,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EquipoActivity extends AppCompatActivity {
+public class EquipoActivity extends AppCompatActivity implements CalendarioFragment.OnListFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -71,7 +72,7 @@ public class EquipoActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
        // mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mSectionsPagerAdapter = new EquiposPageAdapter(getSupportFragmentManager(),2,teamID);
+        mSectionsPagerAdapter = new EquiposPageAdapter(getSupportFragmentManager(),3,teamID);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -137,6 +138,11 @@ public class EquipoActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onListFragmentInteraction(Calendario item) {
+
     }
 
     /**

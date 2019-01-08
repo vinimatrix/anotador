@@ -163,7 +163,7 @@ public class CalendarioFragment extends Fragment {
                                     calendarios.add(c);
                                 }
                                 // Set the adapter
-                                adapter = new MyCalendarioRecyclerViewAdapter(calendarios,mListener);
+                                adapter = new MyCalendarioRecyclerViewAdapter(getContext(),calendarios,mListener);
                                 //ListView list = (ListView)findViewById(R.id.lv_teams);
                                 Log.d("COLUMNAS",String.valueOf(mColumnCount));
                                 recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),

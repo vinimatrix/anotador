@@ -1,5 +1,7 @@
 package com.example.viniciomendez.anotador.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import com.example.viniciomendez.anotador.CalendarioFragment;
 import com.example.viniciomendez.anotador.CalendarioFragment.OnListFragmentInteractionListener;
 import com.example.viniciomendez.anotador.CalendarioFragment2;
 import com.example.viniciomendez.anotador.Entities.Calendario;
+import com.example.viniciomendez.anotador.GameDetailsActivity;
 import com.example.viniciomendez.anotador.R;
 import com.example.viniciomendez.anotador.dummy.DummyContent.DummyItem;
 
@@ -19,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
@@ -29,7 +34,7 @@ public class MyCalendarioRecyclerViewAdapter extends RecyclerView.Adapter<MyCale
 
     private final List<Calendario> calendarioList;
     private final CalendarioFragment.OnListFragmentInteractionListener mListener;
-
+    private Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView txtDia,txtFechaMes,txtEquipos,hora,estadio;
@@ -44,9 +49,10 @@ public class MyCalendarioRecyclerViewAdapter extends RecyclerView.Adapter<MyCale
             estadio= (TextView)itemView.findViewById(R.id.txt_estadio);
         }
     }
-    public MyCalendarioRecyclerViewAdapter(List<Calendario> calendarioList,OnListFragmentInteractionListener listener){
+    public MyCalendarioRecyclerViewAdapter(Context context, List<Calendario> calendarioList, OnListFragmentInteractionListener listener){
         this.calendarioList = calendarioList;
         this.mListener = listener;
+        this.mContext = context;
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -79,7 +85,8 @@ public class MyCalendarioRecyclerViewAdapter extends RecyclerView.Adapter<MyCale
                 if(null !=mListener){
                     mListener.onListFragmentInteraction(holder.mItem);
                     Log.d("CLICKEADO","CLIKEADO " +holder.mItem.getOponent().getNombre());
-
+                    Intent intent = new Intent(mContext,GameDetailsActivity.class);
+                    mContext.startActivity(intent);
                 }
             }
         });

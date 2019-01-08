@@ -25,7 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddTeamActivity" />
-        <activity android:name=".AddCalendario" android:parentActivityName=".EquipoActivity" />
+        <activity
+            android:name=".AddCalendario"
+            android:parentActivityName=".EquipoActivity" />
         <activity
             android:name=".EquipoActivity"
             android:label="@string/title_activity_equipo"
@@ -35,6 +37,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.viniciomendez.anotador.Main2Activity" />
         </activity>
+        <activity android:name=".GameDetailsActivity"></activity>
     </application>
 
 </manifest>

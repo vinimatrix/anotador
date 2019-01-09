@@ -87,9 +87,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_date_range_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\vinicio.mendez" />
+                            <entry key="outputName" value="ic_artboard_16" />
+                            <entry key="sourceFile" value="C:\Users\vinicio.mendez\Creative Cloud Files\SVG\Artboard 16.svg" />
                           </map>
                         </option>
                       </PersistentState>

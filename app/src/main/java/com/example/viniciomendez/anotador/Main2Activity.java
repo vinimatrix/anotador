@@ -40,7 +40,8 @@ public class Main2Activity extends AppCompatActivity {
                  //   mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                  //  mTextMessage.setText(R.string.title_dashboard);
+                  //  mTextMessage.setText(R.str+35
+                    // ing.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
                   //  mTextMessage.setText(R.string.title_notifications);

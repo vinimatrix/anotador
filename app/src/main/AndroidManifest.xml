@@ -37,7 +37,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.viniciomendez.anotador.Main2Activity" />
         </activity>
-        <activity android:name=".GameDetailsActivity"></activity>
+        <activity android:name=".GameDetailsActivity" />
+        <activity
+            android:name=".GameDayActivity"
+            android:label="@string/title_activity_game_day"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

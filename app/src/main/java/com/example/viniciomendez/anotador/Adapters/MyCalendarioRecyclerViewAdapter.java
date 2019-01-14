@@ -86,6 +86,7 @@ public class MyCalendarioRecyclerViewAdapter extends RecyclerView.Adapter<MyCale
                     mListener.onListFragmentInteraction(holder.mItem);
                     Log.d("CLICKEADO","CLIKEADO " +holder.mItem.getOponent().getNombre());
                     Intent intent = new Intent(mContext,GameDetailsActivity.class);
+                    intent.putExtra("GAME_ID",holder.mItem.getCalendarioId());
                     mContext.startActivity(intent);
                 }
             }
